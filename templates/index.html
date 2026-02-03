@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hash Demo Login</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+
+            background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Card */
+        .card {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 380px;
+            z-index: 1;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .choice {
+            text-align: left;
+            margin: 8px 0 14px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .choice label {
+            display: block;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* -------- MODAL COMMON -------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal {
+            background: white;
+            padding: 25px 35px;
+            border-radius: 10px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal h3 {
+            margin-bottom: 15px;
+        }
+
+        .modal button {
+            margin-top: 10px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* SUCCESS MODAL */
+        .success h3 { color: #28a745; }
+        .success button { background-color: #28a745; }
+        .success button:hover { background-color: #1e7e34; }
+
+        /* ERROR MODAL */
+        .error h3 { color: #dc3545; }
+        .error button { background-color: #dc3545; }
+        .error button:hover { background-color: #b02a37; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Sign Up</h2>
+
+        <form method="POST">
+            <div class="choice">
+                <strong>Password storage:</strong>
+                <label>
+                    <input type="radio" name="storage" value="hash" checked>
+                    Hash (recommended)
+                </label>
+                <label>
+                    <input type="radio" name="storage" value="encrypt">
+                    Encrypt (demo)
+                </label>
+                <div class="hint">
+                    Hashing is one-way. Encryption can be reversed if someone has the key.
+                </div>
+            </div>
+
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    {% if success %}
+    <div class="modal-overlay">
+        <div class="modal success">
+            <h3>Success</h3>
+            <p>{{ message }}</p>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ERROR MODAL -->
+    {% if message and not success %}
+    <div class="modal-overlay">
+        <div class="modal error">
+            <h3>Error</h3>
+            <p>{{ message }}</p>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay')
+                .forEach(el => el.style.display = 'none');
+        }
+    </script>
+
+</body>
+</html>
