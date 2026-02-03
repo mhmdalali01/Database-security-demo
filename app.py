@@ -137,4 +137,15 @@ def sql_injection_demo():
 
 # ---------------- RUN SERVER ----------------
 if __name__ == "__main__":
+    # Print URLs in terminal at startup (so you always see them)
+    print("\n========== DATABASE SECURITY DEMO ==========")
+    print("Main Signup Page:")
+    print("  http://127.0.0.1:5000/")
+    print("SQL Injection Demo Page:")
+    print("  http://127.0.0.1:5000/sql-injection-demo")
+    print("Wi-Fi Access (replace with your IP shown by Flask):")
+    print("  http://<YOUR-IP>:5000/")
+    print("  http://<YOUR-IP>:5000/sql-injection-demo")
+    print("===========================================\n")
+
     app.run(host="0.0.0.0", port=5000, debug=True)
