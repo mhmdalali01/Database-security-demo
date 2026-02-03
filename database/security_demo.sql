@@ -16,7 +16,7 @@
 
 
 -- Dumping database structure for security_demo
-DROP DATABASE IF EXISTS `security_demo`;
+
 CREATE DATABASE IF NOT EXISTS `security_demo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `security_demo`;
 
