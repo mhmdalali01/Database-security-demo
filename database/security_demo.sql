@@ -16,24 +16,24 @@
 
 
 -- Dumping database structure for security_demo
-
+DROP DATABASE IF EXISTS `security_demo`;
 CREATE DATABASE IF NOT EXISTS `security_demo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `security_demo`;
 
--- Dumping structure for table security_demo.users
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+-- Dumping structure for table security_demo.insecure_users
+DROP TABLE IF EXISTS `insecure_users`;
+CREATE TABLE IF NOT EXISTS `insecure_users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `password_hash` varbinary(255) DEFAULT NULL,
-  `password_encrypted` varbinary(255) DEFAULT NULL,
-  `storage_method` enum('hash','encrypt') NOT NULL DEFAULT 'hash',
+  `password_plain` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table security_demo.users: ~0 rows (approximately)
-DELETE FROM `users`;
+-- Dumping data for table security_demo.insecure_users: ~1 rows (approximately)
+DELETE FROM `insecure_users`;
+INSERT INTO `insecure_users` (`id`, `username`, `password_plain`) VALUES
+	(1, 'demo', 'demo123');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
